@@ -5,28 +5,23 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create</h1>
-
-<h4>CaliberGauge</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form method="post">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="CaliberGauge.Name" class="control-label"></label>
-                <input asp-for="CaliberGauge.Name" class="form-control" />
-                <span asp-validation-for="CaliberGauge.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
-            </div>
-        </form>
+<div class="row align-items-center">
+    <div class="col">
+        <h1>Add Caliber/Gauge</h1>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
+<div class="row">
+    <div class="col">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <partial name="_Form" for="CaliberGauge" />
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+                <a class="btn btn-secondary" asp-page="./Index">Cancel</a>
+            </div>
+        </form>
+    </div>
 </div>
 
 @section Scripts {

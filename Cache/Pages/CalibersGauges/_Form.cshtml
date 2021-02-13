@@ -1,0 +1,13 @@
+@model Cache.Models.CaliberGauge
+
+@using Cache.Models
+
+<div class="form-row">
+    <div class="col-sm-12 col-md-6">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+    </div>
+</div>
