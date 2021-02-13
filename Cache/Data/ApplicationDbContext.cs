@@ -12,5 +12,9 @@ namespace Cache.Data
             : base(options)
         {
         }
+
+        public DbSet<Cache.Models.Firearm> Firearm { get; set; }
+        
+        public DbSet<Cache.Models.CaliberGauge> CaliberGauge { get; set; }
     }
 }
