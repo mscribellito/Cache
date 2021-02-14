@@ -1,4 +1,4 @@
-@page
+@page "{currentpage=1}/{sortby=DateAcquired}"
 @model Cache.Pages.Firearms.IndexModel
 
 @{
@@ -20,19 +20,29 @@
             <thead>
                 <tr>
                     <th>
+                        <a asp-page="Index" class="sort-link" asp-route-sortby="ManufacturerImporter">
                         @Html.DisplayNameFor(model => model.Firearms[0].ManufacturerImporter)
+                        </a>
                     </th>
                     <th>
+                        <a asp-page="Index" class="sort-link" asp-route-sortby="Model">
                         @Html.DisplayNameFor(model => model.Firearms[0].Model)
+                        </a>
                     </th>
                     <th>
+                        <a asp-page="Index" class="sort-link" asp-route-sortby="Type">
                         @Html.DisplayNameFor(model => model.Firearms[0].Type)
+                        </a>
                     </th>
                     <th>
+                        <a asp-page="Index" class="sort-link" asp-route-sortby="CaliberGauge">
                         @Html.DisplayNameFor(model => model.Firearms[0].CaliberGauge)
+                        </a>
                     </th>
                     <th>
+                        <a asp-page="Index" class="sort-link" asp-route-sortby="Status">
                         @Html.DisplayNameFor(model => model.Firearms[0].Status)
+                        </a>
                     </th>
                     <th></th>
                 </tr>
@@ -75,14 +85,14 @@
   <ul class="pagination justify-content-center">
     <li class="page-item @prevDisabled">
         <a asp-page="./Index"
-            asp-route-pageIndex="@(Model.Firearms.PageIndex - 1)"
+            asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.Firearms.PageIndex - 1).ToString() },{ "sortby", Model.SortBy }})"
             class="page-link">
             Previous
         </a>
     </li>
     <li class="page-item @nextDisabled">
         <a asp-page="./Index"
-            asp-route-pageIndex="@(Model.Firearms.PageIndex + 1)"
+            asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.Firearms.PageIndex + 1).ToString() },{ "sortby", Model.SortBy }})"
             class="page-link">
             Next
         </a>
