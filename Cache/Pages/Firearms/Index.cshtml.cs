@@ -26,6 +26,7 @@ namespace Cache.Pages.Firearms
 
             int pageSize = 10;
             IQueryable<Firearm> firearms = from f in _context.Firearm
+                .Include(f => f.CaliberGauge)
                 select f;
 
             firearms = firearms.OrderByDescending(f => f.DateAcquired);
