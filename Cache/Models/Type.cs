@@ -6,7 +6,8 @@ namespace Cache.Models
         Pistol,
         Rifle,
         Shotgun,
-        Receiver
+        Receiver,
+        Other
     }
 
 }
