@@ -2,102 +2,96 @@
 
 @using Cache.Models
 
-<div class="form-row">
-    <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-            <label asp-for="ManufacturerImporter" class="control-label"></label>
-            <input asp-for="ManufacturerImporter" class="form-control" />
-            <span asp-validation-for="ManufacturerImporter" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-            <label asp-for="Model" class="control-label"></label>
-            <input asp-for="Model" class="form-control" />
-            <span asp-validation-for="Model" class="text-danger"></span>
-        </div>
+<div class="form-group row">
+    <label asp-for="ManufacturerImporter" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="ManufacturerImporter" class="form-control" />
+        <span asp-validation-for="ManufacturerImporter" class="text-danger"></span>
     </div>
 </div>
 
-<div class="form-row">
-    <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-            <label asp-for="SerialNumber" class="control-label"></label>
-            <input asp-for="SerialNumber" class="form-control" />
-            <span asp-validation-for="SerialNumber" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-            <label asp-for="Type" class="control-label"></label>
-            <select asp-for="Type" class="form-control" asp-items="@Html.GetEnumSelectList<Cache.Models.Type>()">
-                <option selected="selected" value=""></option>
-            </select>
-            <span asp-validation-for="Type" class="text-danger"></span>
-        </div>
+<div class="form-group row">
+    <label asp-for="Model" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="Model" class="form-control" />
+        <span asp-validation-for="Model" class="text-danger"></span>
     </div>
 </div>
 
-<div class="form-row">
-    <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-            <label asp-for="CaliberGauge" class="control-label"></label>
-            <select asp-for="CaliberGaugeId" class ="form-control" asp-items="ViewBag.CaliberGaugeId">
-                <option selected="selected" value=""></option>
-            </select>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-            <label asp-for="DateAcquired" class="control-label"></label>
-            <input asp-for="DateAcquired" class="form-control" />
-            <span asp-validation-for="DateAcquired" class="text-danger"></span>
-        </div>
+<div class="form-group row">
+    <label asp-for="SerialNumber" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="SerialNumber" class="form-control" />
+        <span asp-validation-for="SerialNumber" class="text-danger"></span>
     </div>
 </div>
 
-<div class="form-row">
-    <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-            <label asp-for="Cost" class="control-label"></label>
-            <input asp-for="Cost" class="form-control" />
-            <span asp-validation-for="Cost" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-            <label asp-for="Status" class="control-label"></label>
-            <select asp-for="Status" class="form-control" asp-items="@Html.GetEnumSelectList<Cache.Models.Status>()">
-                <option selected="selected" value=""></option>
-            </select>
-            <span asp-validation-for="Status" class="text-danger"></span>
-        </div>
+<div class="form-group row">
+    <label asp-for="Type" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <select asp-for="Type" class="form-control" asp-items="@Html.GetEnumSelectList<Cache.Models.Type>()">
+            <option selected="selected" value=""></option>
+        </select>
+        <span asp-validation-for="Type" class="text-danger"></span>
     </div>
 </div>
 
-<div class="form-row">
-    <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-            <label asp-for="PurchaseLocation" class="control-label"></label>
-            <input asp-for="PurchaseLocation" class="form-control" />
-            <span asp-validation-for="PurchaseLocation" class="text-danger"></span>
-        </div>
-    </div>
-    <div class="col-sm-12 col-md-6">
-        <div class="form-group">
-            <label asp-for="SoldTransferredTo" class="control-label"></label>
-            <input asp-for="SoldTransferredTo" class="form-control" />
-            <span asp-validation-for="SoldTransferredTo" class="text-danger"></span>
-        </div>
+<div class="form-group row">
+    <label asp-for="CaliberGauge" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <select asp-for="CaliberGaugeId" class ="form-control" asp-items="ViewBag.CaliberGaugeId">
+            <option selected="selected" value=""></option>
+        </select>
+        <span asp-validation-for="CaliberGauge" class="text-danger"></span>
     </div>
 </div>
 
-<div class="form-row">
-    <div class="col-sm-12 col-md-12">
-        <div class="form-group">
-            <label asp-for="Notes" class="control-label"></label>
-            <textarea asp-for="Notes" class="form-control"></textarea>
-            <span asp-validation-for="Notes" class="text-danger"></span>
-        </div>
+<div class="form-group row">
+    <label asp-for="DateAcquired" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="DateAcquired" class="form-control" />
+        <span asp-validation-for="DateAcquired" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label asp-for="Cost" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <input asp-for="Cost" class="form-control" />
+        <span asp-validation-for="Cost" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label asp-for="Status" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <select asp-for="Status" class="form-control" asp-items="@Html.GetEnumSelectList<Cache.Models.Status>()">
+            <option selected="selected" value=""></option>
+        </select>
+        <span asp-validation-for="Status" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label asp-for="PurchaseLocation" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <textarea asp-for="PurchaseLocation" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="PurchaseLocation" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label asp-for="SoldTransferredTo" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <textarea asp-for="SoldTransferredTo" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="SoldTransferredTo" class="text-danger"></span>
+    </div>
+</div>
+
+<div class="form-group row">
+    <label asp-for="Notes" class="col-sm-4 col-form-label"></label>
+    <div class="col-sm-8">
+        <textarea asp-for="Notes" class="form-control" rows="5"></textarea>
+        <span asp-validation-for="Notes" class="text-danger"></span>
     </div>
 </div>
