@@ -11,13 +11,12 @@ using Cache.Models;
 
 namespace Cache.Pages.CalibersGauges
 {
-    public class EditModel : PageModel
+    public class EditModel : BasePageModel
     {
-        private readonly Cache.Data.ApplicationDbContext _context;
 
         public EditModel(Cache.Data.ApplicationDbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         [BindProperty]
@@ -30,7 +29,7 @@ namespace Cache.Pages.CalibersGauges
                 return NotFound();
             }
 
-            CaliberGauge = await _context.CaliberGauge.FirstOrDefaultAsync(m => m.Id == id);
+            CaliberGauge = await Context.CaliberGauge.FirstOrDefaultAsync(m => m.Id == id);
 
             if (CaliberGauge == null)
             {
@@ -48,11 +47,11 @@ namespace Cache.Pages.CalibersGauges
                 return Page();
             }
 
-            _context.Attach(CaliberGauge).State = EntityState.Modified;
+            Context.Attach(CaliberGauge).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -71,7 +70,7 @@ namespace Cache.Pages.CalibersGauges
 
         private bool CaliberGaugeExists(int id)
         {
-            return _context.CaliberGauge.Any(e => e.Id == id);
+            return Context.CaliberGauge.Any(e => e.Id == id);
         }
     }
 }

@@ -10,13 +10,12 @@ using Cache.Models;
 
 namespace Cache.Pages.Firearms
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel : BasePageModel
     {
-        private readonly Cache.Data.ApplicationDbContext _context;
 
         public DetailsModel(Cache.Data.ApplicationDbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         public Firearm Firearm { get; set; }
@@ -28,7 +27,7 @@ namespace Cache.Pages.Firearms
                 return NotFound();
             }
 
-            Firearm = await _context.Firearm
+            Firearm = await Context.Firearm
                 .Include(f => f.CaliberGauge).FirstOrDefaultAsync(m => m.Id == id);
 
             if (Firearm == null)

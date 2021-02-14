@@ -10,13 +10,12 @@ using Cache.Models;
 
 namespace Cache.Pages.CalibersGauges
 {
-    public class CreateModel : PageModel
+    public class CreateModel : BasePageModel
     {
-        private readonly Cache.Data.ApplicationDbContext _context;
 
         public CreateModel(Cache.Data.ApplicationDbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         public IActionResult OnGet()
@@ -35,8 +34,8 @@ namespace Cache.Pages.CalibersGauges
                 return Page();
             }
 
-            _context.CaliberGauge.Add(CaliberGauge);
-            await _context.SaveChangesAsync();
+            Context.CaliberGauge.Add(CaliberGauge);
+            await Context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

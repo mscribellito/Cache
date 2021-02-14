@@ -10,13 +10,12 @@ using Cache.Models;
 
 namespace Cache.Pages.CalibersGauges
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : BasePageModel
     {
-        private readonly Cache.Data.ApplicationDbContext _context;
 
         public DeleteModel(Cache.Data.ApplicationDbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         [BindProperty]
@@ -29,7 +28,7 @@ namespace Cache.Pages.CalibersGauges
                 return NotFound();
             }
 
-            CaliberGauge = await _context.CaliberGauge.FirstOrDefaultAsync(m => m.Id == id);
+            CaliberGauge = await Context.CaliberGauge.FirstOrDefaultAsync(m => m.Id == id);
 
             if (CaliberGauge == null)
             {
@@ -45,12 +44,12 @@ namespace Cache.Pages.CalibersGauges
                 return NotFound();
             }
 
-            CaliberGauge = await _context.CaliberGauge.FindAsync(id);
+            CaliberGauge = await Context.CaliberGauge.FindAsync(id);
 
             if (CaliberGauge != null)
             {
-                _context.CaliberGauge.Remove(CaliberGauge);
-                await _context.SaveChangesAsync();
+                Context.CaliberGauge.Remove(CaliberGauge);
+                await Context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");

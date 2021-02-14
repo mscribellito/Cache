@@ -11,13 +11,12 @@ using System.Linq.Dynamic.Core;
 
 namespace Cache.Pages.Firearms
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
-        private readonly Cache.Data.ApplicationDbContext _context;
 
         public IndexModel(Cache.Data.ApplicationDbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         [BindProperty(SupportsGet = true)]
@@ -33,7 +32,7 @@ namespace Cache.Pages.Firearms
         public async Task OnGetAsync()
         {
 
-            IQueryable<Firearm> firearms = from f in _context.Firearm
+            IQueryable<Firearm> firearms = from f in Context.Firearm
                 .Include(f => f.CaliberGauge)
                 .OrderBy(SortBy)
                 select f;

@@ -11,13 +11,12 @@ using Cache.Models;
 
 namespace Cache.Pages.Firearms
 {
-    public class EditModel : PageModel
+    public class EditModel : BasePageModel
     {
-        private readonly Cache.Data.ApplicationDbContext _context;
 
         public EditModel(Cache.Data.ApplicationDbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         [BindProperty]
@@ -30,14 +29,14 @@ namespace Cache.Pages.Firearms
                 return NotFound();
             }
 
-            Firearm = await _context.Firearm
+            Firearm = await Context.Firearm
                 .Include(f => f.CaliberGauge).FirstOrDefaultAsync(m => m.Id == id);
 
             if (Firearm == null)
             {
                 return NotFound();
             }
-           ViewData["CaliberGaugeId"] = new SelectList(_context.CaliberGauge, "Id", "Name");
+           ViewData["CaliberGaugeId"] = new SelectList(Context.CaliberGauge, "Id", "Name");
             return Page();
         }
 
@@ -50,11 +49,11 @@ namespace Cache.Pages.Firearms
                 return Page();
             }
 
-            _context.Attach(Firearm).State = EntityState.Modified;
+            Context.Attach(Firearm).State = EntityState.Modified;
 
             try
             {
-                await _context.SaveChangesAsync();
+                await Context.SaveChangesAsync();
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -73,7 +72,7 @@ namespace Cache.Pages.Firearms
 
         private bool FirearmExists(int id)
         {
-            return _context.Firearm.Any(e => e.Id == id);
+            return Context.Firearm.Any(e => e.Id == id);
         }
     }
 }

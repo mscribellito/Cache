@@ -10,18 +10,17 @@ using Cache.Models;
 
 namespace Cache.Pages.Firearms
 {
-    public class CreateModel : PageModel
+    public class CreateModel : BasePageModel
     {
-        private readonly Cache.Data.ApplicationDbContext _context;
 
         public CreateModel(Cache.Data.ApplicationDbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         public IActionResult OnGet()
         {
-        ViewData["CaliberGaugeId"] = new SelectList(_context.CaliberGauge, "Id", "Name");
+        ViewData["CaliberGaugeId"] = new SelectList(Context.CaliberGauge, "Id", "Name");
             return Page();
         }
 
@@ -36,8 +35,8 @@ namespace Cache.Pages.Firearms
                 return Page();
             }
 
-            _context.Firearm.Add(Firearm);
-            await _context.SaveChangesAsync();
+            Context.Firearm.Add(Firearm);
+            await Context.SaveChangesAsync();
 
             return RedirectToPage("./Index");
         }

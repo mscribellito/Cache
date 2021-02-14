@@ -10,20 +10,19 @@ using Cache.Models;
 
 namespace Cache.Pages.CalibersGauges
 {
-    public class IndexModel : PageModel
+    public class IndexModel : BasePageModel
     {
-        private readonly Cache.Data.ApplicationDbContext _context;
 
         public IndexModel(Cache.Data.ApplicationDbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         public IList<CaliberGauge> CaliberGauge { get;set; }
 
         public async Task OnGetAsync()
         {
-            CaliberGauge = await _context.CaliberGauge.ToListAsync();
+            CaliberGauge = await Context.CaliberGauge.ToListAsync();
         }
     }
 }

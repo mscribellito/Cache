@@ -10,13 +10,12 @@ using Cache.Models;
 
 namespace Cache.Pages.Firearms
 {
-    public class DeleteModel : PageModel
+    public class DeleteModel : BasePageModel
     {
-        private readonly Cache.Data.ApplicationDbContext _context;
 
         public DeleteModel(Cache.Data.ApplicationDbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         [BindProperty]
@@ -29,7 +28,7 @@ namespace Cache.Pages.Firearms
                 return NotFound();
             }
 
-            Firearm = await _context.Firearm
+            Firearm = await Context.Firearm
                 .Include(f => f.CaliberGauge).FirstOrDefaultAsync(m => m.Id == id);
 
             if (Firearm == null)
@@ -46,12 +45,12 @@ namespace Cache.Pages.Firearms
                 return NotFound();
             }
 
-            Firearm = await _context.Firearm.FindAsync(id);
+            Firearm = await Context.Firearm.FindAsync(id);
 
             if (Firearm != null)
             {
-                _context.Firearm.Remove(Firearm);
-                await _context.SaveChangesAsync();
+                Context.Firearm.Remove(Firearm);
+                await Context.SaveChangesAsync();
             }
 
             return RedirectToPage("./Index");

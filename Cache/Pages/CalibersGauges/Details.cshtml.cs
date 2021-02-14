@@ -10,13 +10,12 @@ using Cache.Models;
 
 namespace Cache.Pages.CalibersGauges
 {
-    public class DetailsModel : PageModel
+    public class DetailsModel : BasePageModel
     {
-        private readonly Cache.Data.ApplicationDbContext _context;
 
         public DetailsModel(Cache.Data.ApplicationDbContext context)
+            : base(context)
         {
-            _context = context;
         }
 
         public CaliberGauge CaliberGauge { get; set; }
@@ -28,7 +27,7 @@ namespace Cache.Pages.CalibersGauges
                 return NotFound();
             }
 
-            CaliberGauge = await _context.CaliberGauge.FirstOrDefaultAsync(m => m.Id == id);
+            CaliberGauge = await Context.CaliberGauge.FirstOrDefaultAsync(m => m.Id == id);
 
             if (CaliberGauge == null)
             {
