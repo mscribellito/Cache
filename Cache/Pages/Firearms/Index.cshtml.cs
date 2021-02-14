@@ -19,12 +19,20 @@ namespace Cache.Pages.Firearms
             _context = context;
         }
 
-        public IList<Firearm> Firearm { get;set; }
+        public PaginatedList<Firearm> Firearms { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? pageIndex)
         {
-            Firearm = await _context.Firearm
-                .Include(f => f.CaliberGauge).ToListAsync();
+
+            int pageSize = 10;
+            IQueryable<Firearm> firearms = from f in _context.Firearm
+                select f;
+
+            firearms = firearms.OrderByDescending(f => f.DateAcquired);
+
+            Firearms = await PaginatedList<Firearm>.CreateAsync(
+                firearms.AsNoTracking(), pageIndex ?? 1, pageSize);
+
         }
     }
 }

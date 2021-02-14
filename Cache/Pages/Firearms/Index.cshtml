@@ -20,25 +20,25 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Firearm[0].ManufacturerImporter)
+                        @Html.DisplayNameFor(model => model.Firearms[0].ManufacturerImporter)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Firearm[0].Model)
+                        @Html.DisplayNameFor(model => model.Firearms[0].Model)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Firearm[0].Type)
+                        @Html.DisplayNameFor(model => model.Firearms[0].Type)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Firearm[0].CaliberGauge)
+                        @Html.DisplayNameFor(model => model.Firearms[0].CaliberGauge)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Firearm[0].Status)
+                        @Html.DisplayNameFor(model => model.Firearms[0].Status)
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-        @foreach (var item in Model.Firearm) {
+        @foreach (var item in Model.Firearms) {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.ManufacturerImporter)
@@ -65,3 +65,27 @@
         </table>
     </div>
 </div>
+
+@{
+    var prevDisabled = !Model.Firearms.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.Firearms.HasNextPage ? "disabled" : "";
+}
+
+<nav aria-label="Firearm pagination">
+  <ul class="pagination justify-content-center">
+    <li class="page-item @prevDisabled">
+        <a asp-page="./Index"
+            asp-route-pageIndex="@(Model.Firearms.PageIndex - 1)"
+            class="page-link">
+            Previous
+        </a>
+    </li>
+    <li class="page-item @nextDisabled">
+        <a asp-page="./Index"
+            asp-route-pageIndex="@(Model.Firearms.PageIndex + 1)"
+            class="page-link">
+            Next
+        </a>
+    </li>
+  </ul>
+</nav>
