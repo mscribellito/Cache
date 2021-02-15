@@ -37,6 +37,7 @@ namespace Cache
                 .AddRoles<IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages(options => {
+                options.Conventions.AddPageRoute("/Firearms/Index", "");
                 options.Conventions.AuthorizeFolder("/CalibersGauges");
                 options.Conventions.AuthorizeFolder("/Firearms");
             });
