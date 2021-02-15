@@ -1,23 +1,19 @@
 # Cache
 
-A firearms record with description and origin.
+A personal firearms record web app.
 
-Based on the [Personal Firearms Record](https://www.atf.gov/firearms/docs/guide/personal-firearms-record-atf-p-33128/download) provided by the ATF.
+**Disclaimer:** *This project is not intended for production use. It was created as a means to learn Razor Pages with ASP.NET Core.*
 
-# Docker
+## Docker
 
-## Build
+### Build
 
 ```
 $ docker build -t cache .
 ```
 
-## Run
+### Run
 
 ```
 $ docker run -d -p 8080:80 -t cache
 ```
-
-# Disclaimer
-
-This project is not intended for production use. It was created as a means to learn Razor Pages with ASP.NET Core.
