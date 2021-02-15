@@ -1,16 +1,19 @@
-FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build-env
-WORKDIR /app
+# https://hub.docker.com/_/microsoft-dotnet
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS build
+WORKDIR /source
 
-# Copy csproj and restore as distinct layers
-COPY Cache/*.csproj ./
+# copy csproj and restore as distinct layers
+COPY *.sln .
+COPY Cache/*.csproj ./Cache/
 RUN dotnet restore
 
-# Copy everything else and build
-COPY Cache/* ./
-RUN dotnet publish -c Release -o out
+# copy everything else and build app
+COPY Cache/. ./Cache/
+WORKDIR /source/Cache
+RUN dotnet publish -c release -o /app --no-restore
 
-# Build runtime image
+# final stage/image
 FROM mcr.microsoft.com/dotnet/aspnet:5.0
 WORKDIR /app
-COPY --from=build-env /app/out .
+COPY --from=build /app ./
 ENTRYPOINT ["dotnet", "Cache.dll"]
