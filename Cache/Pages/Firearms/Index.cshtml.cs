@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -14,8 +16,11 @@ namespace Cache.Pages.Firearms
     public class IndexModel : BasePageModel
     {
 
-        public IndexModel(Cache.Data.ApplicationDbContext context)
-            : base(context)
+        public IndexModel(
+            ApplicationDbContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+            : base(context, authorizationService, userManager)
         {
         }
 
@@ -31,9 +36,12 @@ namespace Cache.Pages.Firearms
 
         public async Task OnGetAsync()
         {
+            
+            var currentUserId = UserManager.GetUserId(User);
 
             IQueryable<Firearm> firearms = from f in Context.Firearm
                 .Include(f => f.CaliberGauge)
+                .Where(f => f.UserId == currentUserId)
                 .OrderBy(SortBy)
                 select f;
 

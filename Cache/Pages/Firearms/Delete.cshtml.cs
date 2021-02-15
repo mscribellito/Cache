@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Cache.Authorization;
 using Cache.Data;
 using Cache.Models;
 
@@ -13,8 +16,11 @@ namespace Cache.Pages.Firearms
     public class DeleteModel : BasePageModel
     {
 
-        public DeleteModel(Cache.Data.ApplicationDbContext context)
-            : base(context)
+        public DeleteModel(
+            ApplicationDbContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+            : base(context, authorizationService, userManager)
         {
         }
 
@@ -35,6 +41,15 @@ namespace Cache.Pages.Firearms
             {
                 return NotFound();
             }
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                User, Firearm,
+                Operations.Delete);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+
             return Page();
         }
 
@@ -46,6 +61,14 @@ namespace Cache.Pages.Firearms
             }
 
             Firearm = await Context.Firearm.FindAsync(id);
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                User, Firearm,
+                Operations.Delete);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
 
             if (Firearm != null)
             {

@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Cache.Authorization;
 using Cache.Data;
 using Cache.Models;
 
@@ -14,8 +17,11 @@ namespace Cache.Pages.Firearms
     public class EditModel : BasePageModel
     {
 
-        public EditModel(Cache.Data.ApplicationDbContext context)
-            : base(context)
+        public EditModel(
+            ApplicationDbContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+            : base(context, authorizationService, userManager)
         {
         }
 
@@ -36,7 +42,16 @@ namespace Cache.Pages.Firearms
             {
                 return NotFound();
             }
-           ViewData["CaliberGaugeId"] = new SelectList(Context.CaliberGauge, "Id", "Name");
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                User, Firearm,
+                Operations.Update);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+            
+            ViewData["CaliberGaugeId"] = new SelectList(Context.CaliberGauge, "Id", "Name");
             return Page();
         }
 
@@ -50,6 +65,16 @@ namespace Cache.Pages.Firearms
             }
 
             Context.Attach(Firearm).State = EntityState.Modified;
+
+            Firearm.UserId = UserManager.GetUserId(User);
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                User, Firearm,
+                Operations.Update);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
 
             try
             {
