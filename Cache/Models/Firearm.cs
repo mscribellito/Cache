@@ -10,6 +10,8 @@ namespace Cache.Models
         
         public int Id { get; set; }
 
+        public string UserId { get; set; }
+
         public int CaliberGaugeId { get; set; }
 
         [Required,
