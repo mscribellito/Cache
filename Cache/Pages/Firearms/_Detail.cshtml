@@ -32,16 +32,22 @@
         @Html.DisplayFor(model => model.CaliberGauge.Name)
     </dd>
     <dt class="col-sm-4 text-truncate">
+        @Html.DisplayNameFor(model => model.Cost)
+    </dt>
+    <dd class="col-sm-8">
+        @Html.DisplayFor(model => model.Cost)
+    </dd>
+    <dt class="col-sm-4 text-truncate">
         @Html.DisplayNameFor(model => model.DateAcquired)
     </dt>
     <dd class="col-sm-8">
         @Html.DisplayFor(model => model.DateAcquired)
     </dd>
     <dt class="col-sm-4 text-truncate">
-        @Html.DisplayNameFor(model => model.Cost)
+        @Html.DisplayNameFor(model => model.PurchaseLocation)
     </dt>
     <dd class="col-sm-8">
-        @Html.DisplayFor(model => model.Cost)
+        @Html.DisplayFor(model => model.PurchaseLocation)
     </dd>
     <dt class="col-sm-4 text-truncate">
         @Html.DisplayNameFor(model => model.Status)
@@ -50,10 +56,10 @@
         @Html.DisplayFor(model => model.Status)
     </dd>
     <dt class="col-sm-4 text-truncate">
-        @Html.DisplayNameFor(model => model.PurchaseLocation)
+        @Html.DisplayNameFor(model => model.DateSold)
     </dt>
     <dd class="col-sm-8">
-        @Html.DisplayFor(model => model.PurchaseLocation)
+        @Html.DisplayFor(model => model.DateSold)
     </dd>
     <dt class="col-sm-4 text-truncate">
         @Html.DisplayNameFor(model => model.SoldTransferredTo)

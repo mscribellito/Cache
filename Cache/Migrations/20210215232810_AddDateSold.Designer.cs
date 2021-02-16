@@ -4,14 +4,16 @@ using Cache.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Cache.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210215232810_AddDateSold")]
+    partial class AddDateSold
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -48,13 +50,13 @@ namespace Cache.Migrations
                     b.Property<int>("CaliberGaugeId")
                         .HasColumnType("int");
 
-                    b.Property<decimal?>("Cost")
+                    b.Property<decimal>("Cost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime?>("DateAcquired")
+                    b.Property<DateTime>("DateAcquired")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("DateSold")
+                    b.Property<DateTime>("DateSold")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ManufacturerImporter")
