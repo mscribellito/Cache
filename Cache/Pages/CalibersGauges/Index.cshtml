@@ -1,4 +1,4 @@
-@page
+@page "{currentpage=1}/{sortby=Name}"
 @model Cache.Pages.CalibersGauges.IndexModel
 
 @{
@@ -20,13 +20,13 @@
             <thead>
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.CaliberGauge[0].Name)
+                        @Html.DisplayNameFor(model => model.CalibersGauges[0].Name)
                     </th>
                     <th></th>
                 </tr>
             </thead>
             <tbody>
-        @foreach (var item in Model.CaliberGauge) {
+        @foreach (var item in Model.CalibersGauges) {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.Name)

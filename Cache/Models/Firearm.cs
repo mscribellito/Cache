@@ -5,12 +5,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Cache.Models
 {
 
-    public class Firearm
+    public class Firearm : IUserItem
     {
         
         public int Id { get; set; }
-
-        public string UserId { get; set; }
 
         public int? CaliberGaugeId { get; set; }
 

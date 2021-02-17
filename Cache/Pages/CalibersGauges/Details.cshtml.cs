@@ -2,9 +2,12 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Cache.Authorization;
 using Cache.Data;
 using Cache.Models;
 
@@ -13,8 +16,11 @@ namespace Cache.Pages.CalibersGauges
     public class DetailsModel : BasePageModel
     {
 
-        public DetailsModel(Cache.Data.ApplicationDbContext context)
-            : base(context)
+        public DetailsModel(
+            ApplicationDbContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+            : base(context, authorizationService, userManager)
         {
         }
 
@@ -33,6 +39,15 @@ namespace Cache.Pages.CalibersGauges
             {
                 return NotFound();
             }
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                User, CaliberGauge,
+                Operations.Delete);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+
             return Page();
         }
     }

@@ -2,10 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Cache.Authorization;
 using Cache.Data;
 using Cache.Models;
 
@@ -14,8 +17,11 @@ namespace Cache.Pages.CalibersGauges
     public class EditModel : BasePageModel
     {
 
-        public EditModel(Cache.Data.ApplicationDbContext context)
-            : base(context)
+        public EditModel(
+            ApplicationDbContext context,
+            IAuthorizationService authorizationService,
+            UserManager<IdentityUser> userManager)
+            : base(context, authorizationService, userManager)
         {
         }
 
@@ -35,6 +41,15 @@ namespace Cache.Pages.CalibersGauges
             {
                 return NotFound();
             }
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                User, CaliberGauge,
+                Operations.Update);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
+
             return Page();
         }
 
@@ -48,6 +63,16 @@ namespace Cache.Pages.CalibersGauges
             }
 
             Context.Attach(CaliberGauge).State = EntityState.Modified;
+
+            CaliberGauge.UserId = UserManager.GetUserId(User);
+
+            var isAuthorized = await AuthorizationService.AuthorizeAsync(
+                User, CaliberGauge,
+                Operations.Update);
+            if (!isAuthorized.Succeeded)
+            {
+                return Forbid();
+            }
 
             try
             {

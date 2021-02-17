@@ -14,12 +14,6 @@ namespace Cache.Pages
         protected UserManager<IdentityUser> UserManager { get; }
 
         public BasePageModel(
-            ApplicationDbContext context) : base()
-        {
-            Context = context;
-        }
-
-        public BasePageModel(
             ApplicationDbContext context,
             IAuthorizationService authorizationService,
             UserManager<IdentityUser> userManager) : base()

@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace Cache.Authorization
 {
-    public class FirearmIsOwnerAuthorizationHandler
-                : AuthorizationHandler<OperationAuthorizationRequirement, Firearm>
+    public class IsOwnerAuthorizationHandler
+                : AuthorizationHandler<OperationAuthorizationRequirement, IUserItem>
     {
         UserManager<IdentityUser> _userManager;
 
-        public FirearmIsOwnerAuthorizationHandler(UserManager<IdentityUser> 
+        public IsOwnerAuthorizationHandler(UserManager<IdentityUser> 
             userManager)
         {
             _userManager = userManager;
@@ -20,7 +20,7 @@ namespace Cache.Authorization
         protected override Task
             HandleRequirementAsync(AuthorizationHandlerContext context,
                                    OperationAuthorizationRequirement requirement,
-                                   Firearm resource)
+                                   IUserItem resource)
         {
             if (context.User == null || resource == null)
             {
