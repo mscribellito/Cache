@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Cache.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20210215184008_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20210217222910_Initialize")]
+    partial class Initialize
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -47,13 +47,16 @@ namespace Cache.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CaliberGaugeId")
+                    b.Property<int?>("CaliberGaugeId")
                         .HasColumnType("int");
 
-                    b.Property<decimal>("Cost")
+                    b.Property<decimal?>("Cost")
                         .HasColumnType("decimal(18,2)");
 
-                    b.Property<DateTime>("DateAcquired")
+                    b.Property<DateTime?>("DateAcquired")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("DateSold")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("ManufacturerImporter")
@@ -298,8 +301,7 @@ namespace Cache.Migrations
                     b.HasOne("Cache.Models.CaliberGauge", "CaliberGauge")
                         .WithMany()
                         .HasForeignKey("CaliberGaugeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("CaliberGauge");
                 });

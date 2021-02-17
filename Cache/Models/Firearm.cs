@@ -12,7 +12,7 @@ namespace Cache.Models
 
         public string UserId { get; set; }
 
-        public int CaliberGaugeId { get; set; }
+        public int? CaliberGaugeId { get; set; }
 
         [Required,
         Display(Name = "Manufacturer/Importer")]

@@ -45,7 +45,7 @@ namespace Cache.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("CaliberGaugeId")
+                    b.Property<int?>("CaliberGaugeId")
                         .HasColumnType("int");
 
                     b.Property<decimal?>("Cost")
@@ -299,8 +299,7 @@ namespace Cache.Migrations
                     b.HasOne("Cache.Models.CaliberGauge", "CaliberGauge")
                         .WithMany()
                         .HasForeignKey("CaliberGaugeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.SetNull);
 
                     b.Navigation("CaliberGauge");
                 });
