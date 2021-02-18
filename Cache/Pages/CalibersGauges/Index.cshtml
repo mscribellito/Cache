@@ -7,7 +7,7 @@
 
 <div class="row align-items-center">
     <div class="col">
-        <h1>Calibers/Gauges</h1>
+        <h1>@ViewData["Title"]</h1>
     </div>
     <div class="col text-right">
         <a class="btn btn-primary" asp-page="Create">&plus; Add</a>
@@ -20,7 +20,9 @@
             <thead>
                 <tr>
                     <th>
+                        <a asp-page="Index" class="sort-link" asp-route-sortby="Name">
                         @Html.DisplayNameFor(model => model.CalibersGauges[0].Name)
+                        </a>
                     </th>
                     <th></th>
                 </tr>
@@ -42,3 +44,26 @@
     </div>
 </div>
 
+@{
+    var prevDisabled = !Model.CalibersGauges.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.CalibersGauges.HasNextPage ? "disabled" : "";
+}
+
+<nav aria-label="Firearm pagination">
+  <ul class="pagination justify-content-center">
+    <li class="page-item @prevDisabled">
+        <a asp-page="./Index"
+            asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CalibersGauges.PageIndex - 1).ToString() },{ "sortby", Model.SortBy }})"
+            class="page-link">
+            Previous
+        </a>
+    </li>
+    <li class="page-item @nextDisabled">
+        <a asp-page="./Index"
+            asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CalibersGauges.PageIndex + 1).ToString() },{ "sortby", Model.SortBy }})"
+            class="page-link">
+            Next
+        </a>
+    </li>
+  </ul>
+</nav>
