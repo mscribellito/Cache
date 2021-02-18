@@ -42,7 +42,7 @@ namespace Cache.Pages.Firearms
             IQueryable<Firearm> firearms = from f in Context.Firearm
                 .Include(f => f.CaliberGauge)
                 .Where(f => f.UserId == currentUserId)
-                .OrderBy(SortBy)
+                .OrderBy(SortBy + " descending")
                 select f;
 
             Firearms = await PaginatedList<Firearm>.CreateAsync(
