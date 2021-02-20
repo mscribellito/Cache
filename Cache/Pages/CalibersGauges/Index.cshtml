@@ -54,15 +54,27 @@
     <li class="page-item @prevDisabled">
         <a asp-page="./Index"
             asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CalibersGauges.PageIndex - 1).ToString() },{ "sortby", Model.SortBy }})"
-            class="page-link">
-            Previous
+            class="page-link" aria-label="Previous">
+            <span aria-hidden="true">&laquo;</span>
+            <span class="sr-only">Previous</span>
         </a>
     </li>
+    @for (var i = 1; i <= Model.CalibersGauges.TotalPages; i++)
+        {
+            <li class="page-item @(i == Model.CurrentPage ? "active" : "")">
+                <a asp-page="./Index"
+                    asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (i).ToString() },{ "sortby", Model.SortBy }})"
+                    class="page-link">
+                    @i
+                </a>
+            </li>
+        }
     <li class="page-item @nextDisabled">
         <a asp-page="./Index"
             asp-all-route-data="@(new Dictionary<string, string>{{ "currentpage", (Model.CalibersGauges.PageIndex + 1).ToString() },{ "sortby", Model.SortBy }})"
-            class="page-link">
-            Next
+            class="page-link" aria-label="Next">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only">Next</span>
         </a>
     </li>
   </ul>
