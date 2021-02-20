@@ -49,7 +49,7 @@
             </thead>
             <tbody>
         @foreach (var item in Model.Firearms) {
-                <tr>
+                <tr onclick="document.location = '@Url.Page("./Edit", new { id = item.Id })';">
                     <td>
                         @Html.DisplayFor(modelItem => item.ManufacturerImporter)
                     </td>
