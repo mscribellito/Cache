@@ -16,12 +16,17 @@ public class Firearm
     [Display(Name = "Model")]
     public string? Model { get; set; }
 
+    [Required]
     [Display(Name = "Serial Number")]
     public string? SerialNumber { get; set; }
 
     [Required]
     [Display(Name = "Type")]
     public Type? Type { get; set; }
+
+    [Required]
+    [Display(Name = "Caliber/Gauge")]
+    public Guid? CaliberGaugeId { get; set; }
 
     [Display(Name = "Caliber/Gauge")]
     public CaliberGauge? CaliberGauge { get; set; }
