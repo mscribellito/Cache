@@ -1,0 +1,8 @@
+@model Cache.Models.CaliberGauge
+
+<div class="form-group">
+    <span class="text-danger">*</span>
+    <label asp-for="Name" class="control-label"></label>
+    <input asp-for="Name" class="form-control" aria-required="true"/>
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>

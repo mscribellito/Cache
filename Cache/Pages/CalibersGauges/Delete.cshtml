@@ -11,14 +11,7 @@
 <div>
     <h4>CaliberGauge</h4>
     <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.CaliberGauge.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.CaliberGauge.Name)
-        </dd>
-    </dl>
+    <partial name="_Detail" for="CaliberGauge" />
     
     <form method="post">
         <input type="hidden" asp-for="CaliberGauge.Id" />
